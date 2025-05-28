@@ -1,42 +1,16 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
+#include "Data.h"
+#include<sstream>
+#include<string>
+#include<fstream>
+#include <iomanip>
 using namespace std;
 
-// ==================== Data Structures ====================
-
-struct EmployeeInfo {
-    char gender;
-    string id, firstName, lastName, phoneNumber, department, position,password;
-    double salary, bonus;
-};
-
-struct EmployeeData {
-    EmployeeInfo emp;
-    EmployeeData* next;
-};
-
-struct EmployeeList {
-    int n;
-    EmployeeData *head;
-    EmployeeData *tail;
-};
-
-EmployeeList* createEmployeeList() {
-    EmployeeList* list = new EmployeeList;
-    list->n = 0;
-    list->head = nullptr;
-    list->tail = nullptr;
-    return list;
-}
-
-// ==================== File I/O ====================
+// ==================== File.IO ====================
 
 void writeEmployeeToFile(EmployeeList *l) {
     ofstream f("employee.csv");
     if (!f) {
-        cerr << "Error opening file for writing." << endl;
+        cout << "Error opening file for writing." << endl;
         return;
     }
 
@@ -116,19 +90,30 @@ void sortEmpByName(EmployeeList *l) {
 }
 
 // ==================== Employee Functions ====================
+
 void addEmployee(EmployeeList *l) {
     EmployeeInfo emp;
-    cout << "Enter ID: "; cin >> emp.id;
-    cout << "First Name: "; cin >> emp.firstName;
-    cout << "Last Name: "; cin >> emp.lastName;
-    cout << "Gender (M/F): "; cin >> emp.gender;
-    cout << "Phone: "; cin >> emp.phoneNumber;
+    cout << "Enter ID: "; 
+    cin >> emp.id;
+    cout << "First Name: "; 
+    cin >> emp.firstName;
+    cout << "Last Name: "; 
+    cin >> emp.lastName;
+    cout << "Gender (M/F): "; 
+    cin >> emp.gender;
+    cout << "Phone: "; 
+    cin >> emp.phoneNumber;
     cin.ignore();
-    cout << "Department: "; getline(cin, emp.department);
-    cout << "Position: "; getline(cin, emp.position);
-    cout << "Salary: "; cin >> emp.salary;
-    cout << "Bonus: "; cin >> emp.bonus;
-    cout << "Password: "; cin >> emp.password;
+    cout << "Department: "; 
+    getline(cin, emp.department);
+    cout << "Position: "; 
+    getline(cin, emp.position);
+    cout << "Salary: "; 
+    cin >> emp.salary;
+    cout << "Bonus: "; 
+    cin >> emp.bonus;
+    cout << "Password: "; 
+    cin >> emp.password;
 
     EmployeeData *e = new EmployeeData{emp, nullptr};
 
@@ -147,15 +132,28 @@ void displayEmployees(EmployeeList *l) {
     }
 
     EmployeeData *current = l->head;
+    cout << left << setw(10) << "ID"
+         <<  setw(20)<< "First Name"
+         <<  setw(20)<< "Last Name"
+         <<  setw(10)<< "Gender"
+         <<  setw(20)<< "Phone Number"
+         <<  setw(20)<< "Department"
+         <<  setw(20)<< "Position"
+         <<  setw(20)<< "Salary"
+         <<  setw(20)<< "Bonus"
+         << endl;
     while (current != nullptr) {
-        cout << current->emp.id << " | "
-             << current->emp.firstName << " "
-             << current->emp.lastName << " | "
-             << current->emp.department << " | "
-             << current->emp.position << " | "
-             << current->emp.salary << " | "
-             << current->emp.bonus << endl;
-        current = current->next;
+        cout << left << setw(10) << current ->emp.id
+             <<  setw(20)<< current ->emp.firstName
+             <<  setw(20)<< current ->emp.lastName
+             <<  setw(10)<< current ->emp.gender
+             <<  setw(20)<< current ->emp.phoneNumber
+             <<  setw(20)<< current ->emp.department
+             <<  setw(20)<< current ->emp.position
+             <<  setw(20)<< current ->emp.salary
+             <<  setw(20)<< current->emp.bonus
+             << endl;
+        current= current ->next;
     }
 }
 
@@ -165,22 +163,39 @@ void updateEmp(EmployeeList *l) {
         return;
     }
     string id;
-    cout << "Enter ID to update: "; cin >> id;
+    cout << "Enter ID to update: "; 
+    cin >> id;
 
     EmployeeData *e = l->head;
     while (e) {
         if (e->emp.id == id) {
-            cout << "What to update? 1-First Name, 2-Last Name, 3-Phone, 4-Dept, 5-Pos, 6-Salary, 7-Bonus: ";
-            int ch; cin >> ch;
+            int ch;
+            cout << "What to update? 1-First Name, 2-Last Name, 3-Phone, 4-Dept, 5-Pos, 6-Salary, 7-Bonus: "; 
+            cin >> ch;
             switch (ch) {
-                case 1: cout << "New First Name: "; cin >> e->emp.firstName; break;
-                case 2: cout << "New Last Name: "; cin >> e->emp.lastName; break;
-                case 3: cout << "New Phone: "; cin >> e->emp.phoneNumber; break;
-                case 4: cout << "New Dept: "; cin >> e->emp.department; break;
-                case 5: cout << "New Pos: "; cin >> e->emp.position; break;
-                case 6: cout << "New Salary: "; cin >> e->emp.salary; break;
-                case 7: cout << "New Bonus: "; cin >> e->emp.bonus; break;
-                default: cout << "Invalid choice." << endl;
+                case 1: cout << "New First Name: "; 
+                    cin >> e->emp.firstName; 
+                    break;
+                case 2: cout << "New Last Name: "; 
+                    cin >> e->emp.lastName; 
+                    break;
+                case 3: cout << "New Phone: "; 
+                    cin >> e->emp.phoneNumber; 
+                    break;
+                case 4: cout << "New Dept: "; 
+                    cin >> e->emp.department; 
+                    break;
+                case 5: cout << "New Pos: ";
+                    cin >> e->emp.position; 
+                    break;
+                case 6: cout << "New Salary: "; 
+                    cin >> e->emp.salary; 
+                    break;
+                case 7: cout << "New Bonus: "; 
+                    cin >> e->emp.bonus; 
+                    break;
+                default: 
+                    cout << "Invalid choice." << endl;
             }
             writeEmployeeToFile(l);
             return;
@@ -197,7 +212,8 @@ void removeEmp(EmployeeList *l) {
     }
 
     string id;
-    cout << "Enter ID to remove: "; cin >> id;
+    cout << "Enter ID to remove: "; 
+    cin >> id;
 
     EmployeeData *curr = l->head, *prev = nullptr;
     while (curr) {
@@ -219,15 +235,34 @@ void removeEmp(EmployeeList *l) {
 
 void searchByID(EmployeeList *l) {
     string id;
-    cout << "Enter ID to search: "; cin >> id;
-    EmployeeData *e = l->head;
-    while (e) {
-        if (e->emp.id == id) {
-            cout << e->emp.firstName << " " << e->emp.lastName << " | "
-                 << e->emp.department << " | " << e->emp.position << endl;
-            return;
+    cout << "Enter ID to search: "; 
+    cin >> id;
+    EmployeeData *current = l->head;
+    while (current) {
+        if (current->emp.id == id) {
+            cout << left << setw(10) << "ID"
+                <<  setw(20)<< "First Name"
+                <<  setw(20)<< "Last Name"
+                <<  setw(10)<< "Gender"
+                <<  setw(20)<< "Phone Number"
+                <<  setw(20)<< "Department"
+                <<  setw(20)<< "Position"
+                <<  setw(20)<< "Salary"
+                <<  setw(20)<< "Bonus"
+                << endl;
+            cout << left << setw(10) << current ->emp.id
+                <<  setw(20)<< current ->emp.firstName
+                <<  setw(20)<< current ->emp.lastName
+                <<  setw(10)<< current ->emp.gender
+                <<  setw(20)<< current ->emp.phoneNumber
+                <<  setw(20)<< current ->emp.department
+                <<  setw(20)<< current ->emp.position
+                <<  setw(20)<< current ->emp.salary
+                <<  setw(20)<< current->emp.bonus
+                << endl;
         }
-        e = e->next;
+        current = current->next;
+        return;
     }
     cout << "Not found." << endl;
 }
@@ -239,12 +274,14 @@ void changePassword(EmployeeList *l) {
     }
 
     string id, newPass;
-    cout << "Enter ID: "; cin >> id;
+    cout << "Enter ID: "; 
+    cin >> id;
 
     EmployeeData *L = l->head;
     while (L) {
         if (L->emp.id == id) {
-            cout << "New Password: "; cin >> newPass;
+            cout << "New Password: "; 
+            cin >> newPass;
             L->emp.password = newPass;
             writeEmployeeToFile(l);
             cout << "Password updated." << endl;
@@ -263,13 +300,25 @@ void ManagerBoard() {
         cout << "\n1-View\n2-Add\n3-Update\n4-Delete\n5-Search\n6-Exit\nChoice: ";
         cin >> ch;
         switch (ch) {
-            case 1: displayEmployees(elist); break;
-            case 2: addEmployee(elist); break;
-            case 3: updateEmp(elist); break;
-            case 4: removeEmp(elist); break;
-            case 5: searchByID(elist); break;
-            case 6: return;
-            default: cout << "Invalid." << endl;
+            case 1: 
+                displayEmployees(elist); 
+                break;
+            case 2: 
+                addEmployee(elist);
+                 break;
+            case 3: 
+                updateEmp(elist); 
+                break;
+            case 4: 
+                removeEmp(elist); 
+                break;
+            case 5: 
+                searchByID(elist); 
+                break;
+            case 6: 
+                return;
+            default: 
+                cout << "Invalid." << endl;
         }
     }
 }
@@ -280,19 +329,28 @@ void employeeBoard() {
         cout << "\n1-View Personal Info\n2-Update Personal Info\n3-Change Password\n4.exit\nChoice: ";
         cin >> ch;
         switch (ch) {
-            case 1: displayEmployees(elist); break;
-            case 2: updateEmp(elist); break;
-            case 3: changePassword(elist);
-            case 4: return;
-            default: cout << "Invalid." << endl;
+            case 1: 
+                displayEmployees(elist); 
+                break;
+            case 2: 
+                updateEmp(elist); 
+                break;
+            case 3: 
+                changePassword(elist);
+            case 4: 
+                return;
+            default: 
+            cout << "Invalid." << endl;
         }
     }
 }
 
 void loginManager() {
     string email, pass;
-    cout << "Email: "; cin >> email;
-    cout << "Pass: "; cin >> pass;
+    cout << "Email: "; 
+    cin >> email;
+    cout << "Pass: "; 
+    cin >> pass;
     if (email == "manager" && pass == "manager") {
         cout << "Login success." << endl;
         ManagerBoard();
@@ -304,8 +362,10 @@ void loginManager() {
 
 void loginEmployee() {
     string id, pass;
-    cout << "ID: "; cin >> id;
-    cout << "Pass: "; cin >> pass;
+    cout << "ID: "; 
+    cin >> id;
+    cout << "Pass: "; 
+    cin >> pass;
     EmployeeData *L = elist->head;
     while (L) {
         if (L->emp.id == id && L->emp.password == pass) {
@@ -325,19 +385,19 @@ void firstboard() {
         cout << "\n1-Login as Manager\n2-Login as Employee\n3-Exit\nChoice: ";
         cin >> ch;
         switch (ch) {
-            case 1: loginManager(); break;
-            case 2: loginEmployee(); break;
-            case 3: return;
-            default: cout << "Invalid." << endl;
+            case 1: 
+                loginManager(); 
+                break;
+            case 2: 
+                loginEmployee(); 
+                break;
+            case 3: 
+                return;
+            default: 
+                cout << "Invalid." << endl;
         }
     }
 }
 
-int main() {
-    readEmployeeFromFile(elist);
-    firstboard();
-    writeEmployeeToFile(elist);
-    return 0;
-}
 
 
