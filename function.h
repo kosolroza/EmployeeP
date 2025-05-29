@@ -91,34 +91,57 @@ void sortEmpByName(EmployeeList *l) {
 
 // ==================== Employee Functions ====================
 
+//To make sure string ID with biggercase and smaller are the same
+string toLower(string s) {
+    for (char &c : s) c = tolower(c);
+    return s;
+}
+
+
 void addEmployee(EmployeeList *l) {
     EmployeeInfo emp;
-    cout << "Enter ID: "; 
+
+    cout << "Enter ID: ";
     cin >> emp.id;
-    cout << "First Name: "; 
+
+    // Check for duplicate ID so it can't be add to the list
+    EmployeeData *current = l->head;
+    while (current != nullptr) {
+        if (toLower(current->emp.id) == toLower(emp.id)) {
+            cout << "Error: Employee with ID " << emp.id << " already exists. Cannot add duplicate." << endl;
+            return;
+        }
+        current = current->next;
+    }
+
+    cout << "First Name: ";
     cin >> emp.firstName;
-    cout << "Last Name: "; 
+    cout << "Last Name: ";
     cin >> emp.lastName;
-    cout << "Gender (M/F): "; 
+    cout << "Gender (M/F): ";
     cin >> emp.gender;
-    cout << "Phone: "; 
+    cout << "Phone: ";
     cin >> emp.phoneNumber;
     cin.ignore();
-    cout << "Department: "; 
+    cout << "Department: ";
     getline(cin, emp.department);
-    cout << "Position: "; 
+    cout << "Position: ";
     getline(cin, emp.position);
-    cout << "Salary: "; 
+    cout << "Salary: ";
     cin >> emp.salary;
-    cout << "Bonus: "; 
+    cout << "Bonus: ";
     cin >> emp.bonus;
-    cout << "Password: "; 
+    cout << "Password: ";
     cin >> emp.password;
 
     EmployeeData *e = new EmployeeData{emp, nullptr};
 
-    if (l->head == nullptr) l->head = l->tail = e;
-    else { l->tail->next = e; l->tail = e; }
+    if (l->head == nullptr)
+        l->head = l->tail = e;
+    else {
+        l->tail->next = e;
+        l->tail = e;
+    }
 
     l->n++;
     sortEmpByName(l);
@@ -198,7 +221,7 @@ void updateEmp(EmployeeList *l) {
     while (e) {
         if (e->emp.id == id) {
             int ch;
-            cout << "What to update? 1-First Name, 2-Last Name, 3-Phone, 4-Dept, 5-Pos, 6-Salary, 7-Bonus: "; 
+            cout << "What to update? \n1-First Name \n2-Last Name \n3-Phone Number \n4-Department \n5-Position \n6-Salary \n7-Bonus\nEnter a choice: "; 
             cin >> ch;
             switch (ch) {
                 case 1: cout << "New First Name: "; 
@@ -231,6 +254,44 @@ void updateEmp(EmployeeList *l) {
         e = e->next;
     }
     cout << "Employee not found." << endl;
+}
+
+void updateMyInfo(EmployeeList *l) {
+    if (!l->head) {
+        cout << "No employees to update." << endl;
+        return;
+    }
+    string id, pass;
+    cout << "Enter your ID to update: "; 
+    cin >> id;
+    cout << "Enter your Password to update: "; 
+    cin >> pass;
+
+    EmployeeData *e = l->head;
+    while (e) {
+        if (e->emp.id == id && e->emp.password==pass) {
+            int ch;
+            cout << "What to update?: \n1-First Name \n2-Last Name \n3-Phone \nEnter your choice: "; 
+            cin >> ch;
+            switch (ch) {
+                case 1: cout << "New First Name: "; 
+                    cin >> e->emp.firstName; 
+                    break;
+                case 2: cout << "New Last Name: "; 
+                    cin >> e->emp.lastName; 
+                    break;
+                case 3: cout << "New Phone: "; 
+                    cin >> e->emp.phoneNumber; 
+                    break;
+                default: 
+                    cout << "Invalid choice." << endl;
+            }
+            writeEmployeeToFile(l);
+            return;
+        }
+        e = e->next;
+    }
+    cout << "Incorrect ID/Password! Please try again." << endl;
 }
 
 void removeEmp(EmployeeList *l) {
@@ -399,7 +460,7 @@ void employeeBoard() {
                 displayForEmployees(elist); 
                 break;
             case 2: 
-                updateEmp(elist); 
+                updateMyInfo(elist); 
                 break;
             case 3: 
                 changePassword(elist);
