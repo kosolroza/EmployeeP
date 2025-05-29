@@ -35,7 +35,7 @@ void writeEmployeeToFile(EmployeeList *l) {
 void readEmployeeFromFile(EmployeeList *l) {
     ifstream f("employee.csv");
     if (!f) {
-        cerr << "Error opening file for reading." << endl;
+        cout << "Error opening file for reading." << endl;
         return;
     }
 
@@ -132,7 +132,7 @@ void displayEmployees(EmployeeList *l) {
     }
 
     EmployeeData *current = l->head;
-    cout << left << setw(10) << "ID"
+    cout <<  left << setw(10) << "ID"
          <<  setw(20)<< "First Name"
          <<  setw(20)<< "Last Name"
          <<  setw(10)<< "Gender"
@@ -141,9 +141,9 @@ void displayEmployees(EmployeeList *l) {
          <<  setw(20)<< "Position"
          <<  setw(20)<< "Salary"
          <<  setw(20)<< "Bonus"
-         << endl;
+         <<  endl;
     while (current != nullptr) {
-        cout << left << setw(10) << current ->emp.id
+        cout <<  left << setw(10) << current ->emp.id
              <<  setw(20)<< current ->emp.firstName
              <<  setw(20)<< current ->emp.lastName
              <<  setw(10)<< current ->emp.gender
@@ -151,8 +151,36 @@ void displayEmployees(EmployeeList *l) {
              <<  setw(20)<< current ->emp.department
              <<  setw(20)<< current ->emp.position
              <<  setw(20)<< current ->emp.salary
-             <<  setw(20)<< current->emp.bonus
-             << endl;
+             <<  setw(20)<< current ->emp.bonus
+             <<  endl;
+        current= current ->next;
+    }
+}
+
+void displayForEmployees(EmployeeList *l) {
+    if (l->head == nullptr) {
+        cout << "No employees found." << endl;
+        return;
+    }
+
+    EmployeeData *current = l->head;
+    cout << left << setw(10) << "ID"
+         <<  setw(20)<< "First Name"
+         <<  setw(20)<< "Last Name"
+         <<  setw(10)<< "Gender"
+         <<  setw(20)<< "Phone Number"
+         <<  setw(20)<< "Department"
+         <<  setw(20)<< "Position"
+         <<  endl;
+    while (current != nullptr) {
+        cout <<  left << setw(10) << current ->emp.id
+             <<  setw(20)<< current ->emp.firstName
+             <<  setw(20)<< current ->emp.lastName
+             <<  setw(10)<< current ->emp.gender
+             <<  setw(20)<< current ->emp.phoneNumber
+             <<  setw(20)<< current ->emp.department
+             <<  setw(20)<< current ->emp.position
+             <<  endl;
         current= current ->next;
     }
 }
@@ -267,19 +295,57 @@ void searchByID(EmployeeList *l) {
     cout << "Not found." << endl;
 }
 
+void displayEmployee(EmployeeList *l) {
+    string id,pass;
+    cout << "Enter ID to see your personal info: "; 
+    cin >> id;
+    cout << "Enter your password: ";
+    cin >> pass;
+    EmployeeData *current = l->head;
+    while (current) {
+        if (current->emp.id == id && current->emp.password==pass) {
+            cout <<  left << setw(10) << "ID"
+                <<  setw(20)<< "First Name"
+                <<  setw(20)<< "Last Name"
+                <<  setw(10)<< "Gender"
+                <<  setw(20)<< "Phone Number"
+                <<  setw(20)<< "Department"
+                <<  setw(20)<< "Position"
+                <<  setw(20)<< "Salary"
+                <<  setw(20)<< "Bonus"
+                <<  endl;
+            cout <<  left << setw(10) << current ->emp.id
+             <<  setw(20)<< current ->emp.firstName
+             <<  setw(20)<< current ->emp.lastName
+             <<  setw(10)<< current ->emp.gender
+             <<  setw(20)<< current ->emp.phoneNumber
+             <<  setw(20)<< current ->emp.department
+             <<  setw(20)<< current ->emp.position
+             <<  setw(20)<< current ->emp.salary
+             <<  setw(20)<< current ->emp.bonus
+             <<  endl;
+        }
+        current = current->next;
+        return;
+    }
+    cout << "Incorrect ID/Password or not found." << endl;
+}
+
 void changePassword(EmployeeList *l) {
     if (!l->head) {
         cout << "No users." << endl;
         return;
     }
 
-    string id, newPass;
-    cout << "Enter ID: "; 
+    string id, oldPass, newPass;
+    cout << "Enter your ID: "; 
     cin >> id;
+    cout << "Enter your old password: ";
+    cin >> oldPass;
 
     EmployeeData *L = l->head;
     while (L) {
-        if (L->emp.id == id) {
+        if (L->emp.id == id && L->emp.password==oldPass) {
             cout << "New Password: "; 
             cin >> newPass;
             L->emp.password = newPass;
@@ -289,7 +355,7 @@ void changePassword(EmployeeList *l) {
         }
         L = L->next;
     }
-    cout << "User not found." << endl;
+    cout << "Employee not found." << endl;
 }
 
 EmployeeList *elist = createEmployeeList();
@@ -326,18 +392,22 @@ void ManagerBoard() {
 void employeeBoard() {
     int ch;
     while (true) {
-        cout << "\n1-View Personal Info\n2-Update Personal Info\n3-Change Password\n4.exit\nChoice: ";
+        cout << "\n1-View Employees Info\n2-Update My Personal Info\n3-Change My Password\n4.View My personal Info\n5.Exit\nChoice: ";
         cin >> ch;
         switch (ch) {
             case 1: 
-                displayEmployees(elist); 
+                displayForEmployees(elist); 
                 break;
             case 2: 
                 updateEmp(elist); 
                 break;
             case 3: 
                 changePassword(elist);
+                break;
             case 4: 
+                displayEmployee(elist);
+                break;
+            case 5: 
                 return;
             default: 
             cout << "Invalid." << endl;
@@ -347,9 +417,9 @@ void employeeBoard() {
 
 void loginManager() {
     string email, pass;
-    cout << "Email: "; 
+    cout << "Enter manager's email: "; 
     cin >> email;
-    cout << "Pass: "; 
+    cout << "Enter manager's password: "; 
     cin >> pass;
     if (email == "manager" && pass == "manager") {
         cout << "Login success." << endl;
@@ -362,9 +432,9 @@ void loginManager() {
 
 void loginEmployee() {
     string id, pass;
-    cout << "ID: "; 
+    cout << "Enter your ID: "; 
     cin >> id;
-    cout << "Pass: "; 
+    cout << "Enter your password: "; 
     cin >> pass;
     EmployeeData *L = elist->head;
     while (L) {
@@ -375,7 +445,7 @@ void loginEmployee() {
         }
         L = L->next;
     }
-    cout << "Invalid. Try again." << endl;
+    cout << "Invalid! Please try again." << endl;
     loginEmployee();
 }
 
