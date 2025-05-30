@@ -356,15 +356,10 @@ void searchByID(EmployeeList *l) {
     cout << "Not found." << endl;
 }
 
-void displayEmployee(EmployeeList *l) {
-    string id,pass;
-    cout << "Enter ID to see your personal info: "; 
-    cin >> id;
-    cout << "Enter your password: ";
-    cin >> pass;
+void displayEmployee(EmployeeList *l, string id) {
     EmployeeData *current = l->head;
     while (current) {
-        if (current->emp.id == id && current->emp.password==pass) {
+        if (current->emp.id == id) {
             cout <<  left << setw(10) << "ID"
                 <<  setw(20)<< "First Name"
                 <<  setw(20)<< "Last Name"
@@ -385,11 +380,12 @@ void displayEmployee(EmployeeList *l) {
              <<  setw(20)<< current ->emp.salary
              <<  setw(20)<< current ->emp.bonus
              <<  endl;
+            return;
         }
         current = current->next;
-        return;
     }
     cout << "Incorrect ID/Password or not found." << endl;
+    return;
 }
 
 void changePassword(EmployeeList *l) {
@@ -416,7 +412,7 @@ void changePassword(EmployeeList *l) {
         }
         L = L->next;
     }
-    cout << "Employee not found." << endl;
+    cout << "Incorrect ID or Password!" << endl;
 }
 
 EmployeeList *elist = createEmployeeList();
@@ -450,6 +446,9 @@ void ManagerBoard() {
     }
 }
 
+//to know who is in control rn
+string currentLoginID;
+
 void employeeBoard() {
     int ch;
     while (true) {
@@ -466,7 +465,7 @@ void employeeBoard() {
                 changePassword(elist);
                 break;
             case 4: 
-                displayEmployee(elist);
+                displayEmployee(elist, currentLoginID);
                 break;
             case 5: 
                 return;
@@ -492,15 +491,16 @@ void loginManager() {
 }
 
 void loginEmployee() {
-    string id, pass;
+    string loginId, loginPass;
     cout << "Enter your ID: "; 
-    cin >> id;
+    cin >> loginId;
     cout << "Enter your password: "; 
-    cin >> pass;
+    cin >> loginPass;
     EmployeeData *L = elist->head;
     while (L) {
-        if (L->emp.id == id && L->emp.password == pass) {
+        if (L->emp.id == loginId && L->emp.password == loginPass) {
             cout << "Welcome!" << endl;
+            currentLoginID = loginId;
             employeeBoard();
             return;
         }
