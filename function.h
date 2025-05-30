@@ -148,7 +148,7 @@ void addEmployee(EmployeeList *l) {
     writeEmployeeToFile(l);
 }
 
-void displayEmployees(EmployeeList *l) {
+void displayAllEmployees(EmployeeList *l) {
     if (l->head == nullptr) {
         cout << "No employees found." << endl;
         return;
@@ -207,7 +207,7 @@ void displayForEmployees(EmployeeList *l) {
         current= current ->next;
     }
 }
-
+//----------------------------------------- function that let manager edit emplyyee info ------------------------------------------------------
 void updateEmp(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to update." << endl;
@@ -255,7 +255,7 @@ void updateEmp(EmployeeList *l) {
     }
     cout << "Employee not found." << endl;
 }
-
+//------------------------------------------ function that let employee edit their info ----------------------------------------------------
 void updateMyInfo(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to update." << endl;
@@ -293,7 +293,7 @@ void updateMyInfo(EmployeeList *l) {
     }
     cout << "Incorrect ID/Password! Please try again." << endl;
 }
-
+//-------------------------------------------- Function remove empoyee fro list ------------------------------------------------------------
 void removeEmp(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to remove." << endl;
@@ -321,7 +321,7 @@ void removeEmp(EmployeeList *l) {
     }
     cout << "Employee not found." << endl;
 }
-
+//---------------------------------------------Function for searching employee---------------------------------------------------------
 void searchByID(EmployeeList *l) {
     string id;
     cout << "Enter ID to search: "; 
@@ -356,7 +356,7 @@ void searchByID(EmployeeList *l) {
     cout << "Not found." << endl;
 }
 
-void displayEmployee(EmployeeList *l, string id) {
+void displaySingleEmployee(EmployeeList *l, string id) {
     EmployeeData *current = l->head;
     while (current) {
         if (current->emp.id == id) {
@@ -424,7 +424,7 @@ void ManagerBoard() {
         cin >> ch;
         switch (ch) {
             case 1: 
-                displayEmployees(elist); 
+                displayAllEmployees(elist); 
                 break;
             case 2: 
                 addEmployee(elist);
@@ -465,7 +465,7 @@ void employeeBoard() {
                 changePassword(elist);
                 break;
             case 4: 
-                displayEmployee(elist, currentLoginID);
+                displaySingleEmployee(elist, currentLoginID);
                 break;
             case 5: 
                 return;
