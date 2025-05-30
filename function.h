@@ -7,6 +7,7 @@ using namespace std;
 
 // ==================== File.IO ====================
 
+//Write Employee to the file
 void writeEmployeeToFile(EmployeeList *l) {
     ofstream f("employee.csv");
     if (!f) {
@@ -32,6 +33,7 @@ void writeEmployeeToFile(EmployeeList *l) {
     f.close();
 }
 
+//read employee from the file
 void readEmployeeFromFile(EmployeeList *l) {
     ifstream f("employee.csv");
     if (!f) {
@@ -72,6 +74,7 @@ void readEmployeeFromFile(EmployeeList *l) {
     f.close();
 }
 
+//sort employee by name after before write it to file
 void sortEmpByName(EmployeeList *l) {
     if (l->head == nullptr || l->head->next == nullptr) return;
 
@@ -97,7 +100,7 @@ string toLower(string s) {
     return s;
 }
 
-
+//add employee to list that we create
 void addEmployee(EmployeeList *l) {
     EmployeeInfo emp;
 
@@ -148,6 +151,7 @@ void addEmployee(EmployeeList *l) {
     writeEmployeeToFile(l);
 }
 
+//display all employee info for manager except his/her password
 void displayEmployees(EmployeeList *l) {
     if (l->head == nullptr) {
         cout << "No employees found." << endl;
@@ -180,6 +184,7 @@ void displayEmployees(EmployeeList *l) {
     }
 }
 
+//display employees to other but hide their privacy info
 void displayForEmployees(EmployeeList *l) {
     if (l->head == nullptr) {
         cout << "No employees found." << endl;
@@ -208,6 +213,7 @@ void displayForEmployees(EmployeeList *l) {
     }
 }
 
+//for manager update some wrong info about employee
 void updateEmp(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to update." << endl;
@@ -256,6 +262,7 @@ void updateEmp(EmployeeList *l) {
     cout << "Employee not found." << endl;
 }
 
+//employee has right to edit their info as well but not fully as manager
 void updateMyInfo(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to update." << endl;
@@ -294,6 +301,7 @@ void updateMyInfo(EmployeeList *l) {
     cout << "Incorrect ID/Password! Please try again." << endl;
 }
 
+//for manager to delete any employee
 void removeEmp(EmployeeList *l) {
     if (!l->head) {
         cout << "No employees to remove." << endl;
@@ -322,6 +330,7 @@ void removeEmp(EmployeeList *l) {
     cout << "Employee not found." << endl;
 }
 
+//looking for a employee much more easier for manager
 void searchByID(EmployeeList *l) {
     string id;
     cout << "Enter ID to search: "; 
@@ -356,6 +365,7 @@ void searchByID(EmployeeList *l) {
     cout << "Not found." << endl;
 }
 
+//display employee thier own info after login
 void displayEmployee(EmployeeList *l, string id) {
     EmployeeData *current = l->head;
     while (current) {
@@ -388,6 +398,7 @@ void displayEmployee(EmployeeList *l, string id) {
     return;
 }
 
+//employee can change thier password in case somethings wrong
 void changePassword(EmployeeList *l) {
     if (!l->head) {
         cout << "No users." << endl;
@@ -415,8 +426,10 @@ void changePassword(EmployeeList *l) {
     cout << "Incorrect ID or Password!" << endl;
 }
 
+//create a empty list
 EmployeeList *elist = createEmployeeList();
 
+//manager interface
 void ManagerBoard() {
     int ch;
     while (true) {
@@ -446,9 +459,10 @@ void ManagerBoard() {
     }
 }
 
-//to know who is in control rn
+//to know who employee is in control right now
 string currentLoginID;
 
+//employee interface
 void employeeBoard() {
     int ch;
     while (true) {
@@ -475,6 +489,7 @@ void employeeBoard() {
     }
 }
 
+//manager login 
 void loginManager() {
     string email, pass;
     cout << "Enter manager's email: "; 
@@ -490,6 +505,7 @@ void loginManager() {
     }
 }
 
+//employee login
 void loginEmployee() {
     string loginId, loginPass;
     cout << "Enter your ID: "; 
@@ -510,6 +526,7 @@ void loginEmployee() {
     loginEmployee();
 }
 
+//The 1st interface before anythings
 void firstboard() {
     int ch;
     while (true) {
