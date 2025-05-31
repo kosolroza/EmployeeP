@@ -5,8 +5,8 @@ using namespace std;
 
 
 int main() {
-    firstboard();
     readEFromFile(elist);
+    firstboard();
     writeEToFile(elist);
     return 0;
 }
