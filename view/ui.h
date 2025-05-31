@@ -1,9 +1,5 @@
 #include <iostream>
-// #include <thread>
-// #include <chrono>
 #include <conio.h>
-
-
 #include <windows.h>
 
 using namespace std;
