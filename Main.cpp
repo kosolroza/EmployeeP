@@ -1,7 +1,12 @@
-#include "function.h"
+#include <iostream>
+#include "view/menu.h"
+
+using namespace std;
+
+
 int main() {
-    readEmployeeFromFile(elist);
     firstboard();
-    writeEmployeeToFile(elist);
+    readEFromFile(elist);
+    writeEToFile(elist);
     return 0;
 }
