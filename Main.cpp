@@ -1,8 +1,4 @@
-#include <iostream>
 #include "view/menu.h"
-
-using namespace std;
-
 
 int main() {
     readEFromFile(elist);

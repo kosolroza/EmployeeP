@@ -1,10 +1,9 @@
-#include <iostream>
 #include <fstream>   //using fstream as a library to write fileio
 #include <sstream>   //sstream use to write read from file
+
 #include "../model/function.h"   //include funtion from model folder. ***** <../> mean to go up then look for function file
 
 using namespace std;
-
 
 // ==================== File.IO ====================
 

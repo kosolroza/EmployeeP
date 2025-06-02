@@ -28,3 +28,4 @@ EList* createEmployeeList() {   // Make List to store Employees
     list->tail = nullptr;
     return list;
 }
+

@@ -1,5 +1,3 @@
-#include <iostream>
-#include <iomanip>
 #include "employee.h"
 
 using namespace std;

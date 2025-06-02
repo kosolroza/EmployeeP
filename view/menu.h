@@ -1,8 +1,6 @@
-#include <iostream>
 #include "../service/manager.h"
 #include "ui.h"
 
-using namespace std;
 
 //create a empty list
 EList *elist = createEmployeeList();

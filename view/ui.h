@@ -1,8 +1,5 @@
-#include <iostream>
 #include <conio.h>
 #include <windows.h>
-
-using namespace std;
 
 //color codes
 const string RESET = "\033[0m";
