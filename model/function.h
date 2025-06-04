@@ -12,7 +12,8 @@ struct EInfo {      //Employee information
 
 struct EData {     //Employee Data to store Employees Information
     EInfo emp;
-    EData* next;
+    EData *next;
+    EData *pre;
 };
 
 struct EList {    //Using single Linked List to put Employee into list 

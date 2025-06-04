@@ -105,14 +105,14 @@ void changePassword(EList *l) {
 
 //display employee thier own info after login
 
-void displayOwnInfo(EList *l, string id) {
+void displayOwnInfo(EList *l, string pass) {
     EData *d = l->head;
     bool found = 0;
-    cout<<"Please confirm your ID and password first"<<endl;
-    cout<<"Enter your ID: ";
-    cin>>id;
+    cout<<"Please confirm your password first"<<endl;
+    cout<<"Enter your password: ";
+    cin>>pass;
     while (d) {
-        if (d->emp.id == id) {
+        if (d->emp.password == pass) {
             cout<<"---------------------------------------------------------------------------------------------------------\n";
             cout << "| "<< setw(10)<<left << "ID"
             <<  setw(15) <<left<< "First Name"

@@ -12,20 +12,22 @@ string toLower(string s) {
 
 //================== Add Employee to list that we create =============
 
-void addEmployee(EList *l) {
-    EInfo emp;
+// Use add To End as addEmployee
+void addEmployee(EList *l) {      
+    EInfo emp;   //call EInfo cause It store E'Info
 
     cout << "Enter ID: ";
     cin >> emp.id;
 
     // Check for duplicate ID so it can't be add to the list
-    EData *current = l->head;
-    while (current != nullptr) {
-        if (toLower(current->emp.id) == toLower(emp.id)) {
+
+    EData *E = l->head;    //make sure that data start from head 
+    while (E != nullptr) {
+        if (toLower(E->emp.id) == toLower(emp.id)) {    //checking if id input with small letter or big letter
             cout << "Error: Employee with ID " << emp.id << " already exists. Cannot add duplicate." << endl;
             return;
         }
-        current = current->next;
+        E = E->next;
     }
 
     cout << "First Name: ";
@@ -48,18 +50,25 @@ void addEmployee(EList *l) {
     cout << "Password: ";
     cin >> emp.password;
 
-    EData *e = new EData{emp, nullptr};
+    EData *e = new EData;  //Let all emp info = null all
+    e->next = nullptr;
+    e->pre = nullptr;
 
-    if (l->head == nullptr)
-        l->head = l->tail = e;
+    if (l->head == nullptr){
+        l->head = e;
+        l->tail = e;
+    }
     else {
         l->tail->next = e;
+        e->pre = l->tail;
         l->tail = e;
     }
 
     l->n++;
     sortEmpByName(l);
     writeEToFile(l);
+    
+    cout<<"Employee has been add to system successfully!"<<endl;
 }
 
 //for manager update some wrong info about employee
@@ -72,7 +81,7 @@ void updateEmp(EList *l) {
     cout << "Enter ID to update: "; 
     cin >> id;
 
-    EData *e = l->head;
+    EData *e = l->head;   // also make sure that it start from head
     while (e) {
         if (e->emp.id == id) {
             int ch;
@@ -88,10 +97,10 @@ void updateEmp(EList *l) {
                 case 3: cout << "New Phone: "; 
                     cin >> e->emp.phoneNumber; 
                     break;
-                case 4: cout << "New Dept: "; 
+                case 4: cout << "New Department: "; 
                     cin >> e->emp.department; 
                     break;
-                case 5: cout << "New Pos: ";
+                case 5: cout << "New Position: ";
                     cin >> e->emp.position; 
                     break;
                 case 6: cout << "New Salary: "; 
@@ -103,7 +112,7 @@ void updateEmp(EList *l) {
                 default: 
                     cout << "Invalid choice." << endl;
             }
-            writeEToFile(l);
+            writeEToFile(l);    //afer update, writeToFile csv
             return;
         }
         e = e->next;
@@ -123,22 +132,32 @@ void removeEmp(EList *l) {
     cout << "Enter ID to remove: "; 
     cin >> id;
 
-    EData *curr = l->head, *prev = nullptr;
-    while (curr) {
-        if (curr->emp.id == id) {
-            if (!prev) l->head = curr->next;
-            else prev->next = curr->next;
-            if (curr == l->tail) l->tail = prev;
-            delete curr;
+    EData *e = l->head;
+    EData *pre = nullptr;
+
+    while(e != nullptr){
+        if(e->emp.id == id){
+            //for delete from head
+            if(e->pre = nullptr){
+                l->head = e->next;
+            }
+            else{
+                pre->next = e->next;
+            }
+            //for delete from tail
+            if(e==l->tail){
+                l->tail = pre;
+            }
+            delete e;
             l->n--;
             writeEToFile(l);
-            cout << "Employee removed." << endl;
+            cout<<"Employee removed!"<<endl;
             return;
         }
-        prev = curr;
-        curr = curr->next;
+        pre = e;
+        e = e->next;
     }
-    cout << "Employee not found." << endl;
+    cout<<"Employee not found!"<<endl;
 }
 
 //looking for a employee much more easier for manager
@@ -146,10 +165,10 @@ void searchByID(EList *l) {
     string id;
     cout << "Enter ID to search: "; 
     cin >> id;
-    EData *d = l->head;
+    EData *e = l->head;
     bool found = 0;
-    while (d) {
-        if (d->emp.id == id) {
+    while (e) {
+        if (e->emp.id == id) {
             cout<<"--------------------------------------------------------------------------------------------------------------------\n";
             cout << "| "<< setw(10)<<left << "ID"
             <<  setw(15) <<left<< "First Name"
@@ -161,21 +180,21 @@ void searchByID(EList *l) {
             <<  setw(10) <<left<<  "Salary"
             <<  setw(8) <<left<<  "Bonus"
             <<  "|"<<endl;
-            cout << "| "<< setw(10) <<left<< d ->emp.id
-            <<  setw(15) <<left<< d ->emp.firstName
-            <<  setw(15)<<left<< d ->emp.lastName
-            <<  setw(8)<<left<< d ->emp.gender
-            <<  setw(15)<<left<< d ->emp.phoneNumber
-            <<  setw(15)<<left<< d ->emp.department
-            <<  setw(15)<<left<< d->emp.position<<"$"
-            <<  setw(10)<<left<< d->emp.salary<<"$"
-            <<  setw(8)<<left<< d->emp.bonus
+            cout << "| "<< setw(10) <<left<< e ->emp.id
+            <<  setw(15) <<left<< e ->emp.firstName
+            <<  setw(15)<<left<< e ->emp.lastName
+            <<  setw(8)<<left<< e ->emp.gender
+            <<  setw(15)<<left<< e ->emp.phoneNumber
+            <<  setw(15)<<left<< e ->emp.department
+            <<  setw(15)<<left<< e->emp.position<<"$"
+            <<  setw(10)<<left<< e->emp.salary<<"$"
+            <<  setw(8)<<left<< e->emp.bonus
             <<  "  |"<<endl;
             cout<<"--------------------------------------------------------------------------------------------------------------------\n";
             found = 1;
             break;
         }
-        d = d->next;
+        e = e->next;
     }
     if(!found){
         cout<<"Not found!";
@@ -188,7 +207,7 @@ void displayEmployees(EList *l) {
         return;
     }
 
-    EData *d = l->head;
+    EData *e = l->head;
     cout<<"--------------------------------------------------------------------------------------------------------------------\n";
     cout << "| "<< setw(10)<<left << "ID"
          <<  setw(15) <<left<< "First Name"
@@ -200,18 +219,18 @@ void displayEmployees(EList *l) {
          <<  setw(10) <<left<<  "Salary"
          <<  setw(8)  <<left<<  " Bonus"
          <<  "  |"<<endl;
-    while (d != nullptr) {
-        cout << "| "<< setw(10) <<left<< d ->emp.id
-             <<  setw(15) <<left<< d ->emp.firstName
-             <<  setw(15)<<left<< d ->emp.lastName
-             <<  setw(8)<<left<< d ->emp.gender
-             <<  setw(15)<<left<< d ->emp.phoneNumber
-             <<  setw(15)<<left<< d ->emp.department
-             <<  setw(15)<<left<< d->emp.position<<"$"
-             <<  setw(10)<<left<<d->emp.salary<<"$"
-             <<  setw(8)<<left<<d->emp.bonus
+    while (e != nullptr) {
+        cout << "| "<< setw(10) <<left<< e ->emp.id
+             <<  setw(15) <<left<< e ->emp.firstName
+             <<  setw(15)<<left<< e ->emp.lastName
+             <<  setw(8)<<left<< e ->emp.gender
+             <<  setw(15)<<left<< e ->emp.phoneNumber
+             <<  setw(15)<<left<< e ->emp.department
+             <<  setw(15)<<left<< e->emp.position<<"$"
+             <<  setw(10)<<left<<e->emp.salary<<"$"
+             <<  setw(8)<<left<<e->emp.bonus
              <<  "|"<<endl;
-        d = d ->next;
+        e = e ->next;
     }
     cout<<"--------------------------------------------------------------------------------------------------------------------\n";
 }

@@ -15,7 +15,7 @@ void writeEToFile(EList *l) {
         return;
     }
 
-    f << "ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus" << endl;
+    f << "ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus,Password" << endl;
     EData *e = l->head;
     while (e != nullptr) {
         f << e->emp.id << ","
@@ -76,7 +76,9 @@ void readEFromFile(EList *l) {
 
 //sort employee by name after before write it to file
 void sortEmpByName(EList *l) {
-    if (l->head == nullptr || l->head->next == nullptr) return;
+    if (l->head == nullptr || l->head->next == nullptr) {
+        return;
+    }
 
     bool swapped;
     do {

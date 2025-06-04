@@ -3,7 +3,7 @@
 
 
 //create a empty list
-EList *elist = createEmployeeList();
+EList *elist = createEmployeeList(); 
 
 //manager interface
 void ManagerBoard() {
@@ -78,7 +78,7 @@ void loginManager() {
         loading();
         cout<<"\n\n";
         cout << "\033[1;32mLogin successful!.\033[0m";
-        Sleep(800);
+        sleep(1);      //sleep for 1 second
         ManagerBoard();
     } else {
         cout << "\033[1;31mInvalid Email or Password. Please Try again. \033[0m" << endl;
@@ -99,7 +99,7 @@ void loginEmployee() {
             loading();
             cout<<"\n\n";
             cout << "\033[1;33m========== Welcome! ==========\033[0m";
-            Sleep(800);
+            sleep(1);
             currentLoginID = loginId;
             employeeBoard();
             return;

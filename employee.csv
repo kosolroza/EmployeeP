@@ -1,3 +1,7 @@
-ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus
-E002,Ariana,Grande,F,00000000,Performance,Singer,40000,2300,456
-E001,Kosol,Roza,F,11124569,IT,DATA,1200,200,1122
+ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus,Password
+E024,Chan,Nita,F,01478552,Finance,Accounting,800,70,456
+E008,Chea,Heng,M,01255444,Sale,Sale,1400,300,456
+E025,Hort,Kimmeng,M,01259888,IT,Data,1300,100,456
+E005,Kheang,Laiheak,F,01222555,Electrical,Ele-Engineer,2000,150,456
+E001,Kosol,Roza,F,01245877,IT,Data,1200,200,456
+E004,Leu,Sophal,M,01255996,IT,Data,1100,300,456

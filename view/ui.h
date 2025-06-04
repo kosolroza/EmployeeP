@@ -1,5 +1,6 @@
-#include <conio.h>
-#include <windows.h>
+#include <unistd.h>   //for sleep function
+#include <conio.h>    //for cover password function
+
 
 //color codes
 const string RESET = "\033[0m";
@@ -76,7 +77,7 @@ void intoEmployee(){
 void loading(){
     cout<<"\n\033[1;36mPlease wait for a moment";
     for(int i=0; i<5; i++){
-        Sleep(500);
+        sleep(1);
         cout<<".";
     }
 }
