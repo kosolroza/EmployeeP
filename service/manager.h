@@ -15,11 +15,8 @@ string toLower(string s) {
 // Use add To End as addEmployee
 void addEmployee(EList *l) {      
     EInfo emp;   //call EInfo cause It store E'Info
-
-    cout << "Enter ID: ";
+    cout << "Enter ID: ";   // Check for duplicate ID so it can't be add to the list
     cin >> emp.id;
-
-    // Check for duplicate ID so it can't be add to the list
 
     EData *E = l->head;    //make sure that data start from head 
     while (E != nullptr) {
@@ -29,7 +26,6 @@ void addEmployee(EList *l) {
         }
         E = E->next;
     }
-
     cout << "First Name: ";
     cin >> emp.firstName;
     cout << "Last Name: ";
@@ -51,9 +47,9 @@ void addEmployee(EList *l) {
     cin >> emp.password;
 
     EData *e = new EData;  //Let all emp info = null all
+    e->emp = emp;
     e->next = nullptr;
     e->pre = nullptr;
-
     if (l->head == nullptr){
         l->head = e;
         l->tail = e;
@@ -63,11 +59,9 @@ void addEmployee(EList *l) {
         e->pre = l->tail;
         l->tail = e;
     }
-
     l->n++;
     sortEmpByName(l);
     writeEToFile(l);
-    
     cout<<"Employee has been add to system successfully!"<<endl;
 }
 
@@ -113,6 +107,7 @@ void updateEmp(EList *l) {
                     cout << "Invalid choice." << endl;
             }
             writeEToFile(l);    //afer update, writeToFile csv
+            cout<<"Employee has been updated to system successfully!"<<endl;
             return;
         }
         e = e->next;
@@ -122,6 +117,7 @@ void updateEmp(EList *l) {
 
 
 //for manager to delete any employee
+//this funtion is remove at position 
 void removeEmp(EList *l) {
     if (!l->head) {
         cout << "No employees to remove." << endl;
@@ -179,7 +175,8 @@ void searchByID(EList *l) {
             <<  setw(15) <<left<<  "Position"
             <<  setw(10) <<left<<  "Salary"
             <<  setw(8) <<left<<  "Bonus"
-            <<  "|"<<endl;
+            <<  "  |"<<endl;
+            cout<<"--------------------------------------------------------------------------------------------------------------------\n";
             cout << "| "<< setw(10) <<left<< e ->emp.id
             <<  setw(15) <<left<< e ->emp.firstName
             <<  setw(15)<<left<< e ->emp.lastName
@@ -189,7 +186,7 @@ void searchByID(EList *l) {
             <<  setw(15)<<left<< e->emp.position<<"$"
             <<  setw(10)<<left<< e->emp.salary<<"$"
             <<  setw(8)<<left<< e->emp.bonus
-            <<  "  |"<<endl;
+            <<  "|"<<endl;
             cout<<"--------------------------------------------------------------------------------------------------------------------\n";
             found = 1;
             break;
@@ -219,6 +216,7 @@ void displayEmployees(EList *l) {
          <<  setw(10) <<left<<  "Salary"
          <<  setw(8)  <<left<<  " Bonus"
          <<  "  |"<<endl;
+    cout<<"--------------------------------------------------------------------------------------------------------------------\n";
     while (e != nullptr) {
         cout << "| "<< setw(10) <<left<< e ->emp.id
              <<  setw(15) <<left<< e ->emp.firstName

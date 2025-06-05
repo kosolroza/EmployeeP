@@ -9,15 +9,16 @@ void displayAllEmployees(EList *l) {   //display all employee in company
         return;
     }
     EData *d = l->head;
-    cout<<"------------------------------------------------------------------------------------------\n";
+    cout<<"-----------------------------------------------------------------------------------------------\n";
     cout << "| "<< setw(10)<<left << "ID"
          <<  setw(15) <<left<< "First Name"
          <<  setw(15) <<left<< "Last Name"
          <<  setw(8)  <<left<< "Gender"
          <<  setw(15) <<left<< "Phone Number"
          <<  setw(15) <<left<< "Department"
-         <<  setw(10) <<left<<  "Position"
+         <<  setw(15) <<left<<  "Position"
          <<  "|"<<endl;
+    cout<<"-----------------------------------------------------------------------------------------------\n";
     while (d != nullptr) {
         cout << "| "<< setw(10) <<left<< d ->emp.id
              <<  setw(15) <<left<< d ->emp.firstName
@@ -25,11 +26,11 @@ void displayAllEmployees(EList *l) {   //display all employee in company
              <<  setw(8)<<left<< d ->emp.gender
              <<  setw(15)<<left<< d ->emp.phoneNumber
              <<  setw(15)<<left<< d ->emp.department
-             <<  setw(10)<<left<< d->emp.position
+             <<  setw(15)<<left<< d->emp.position
              <<  "|"<<endl;
         d = d ->next;
     }
-    cout<<"------------------------------------------------------------------------------------------\n";
+    cout<<"-----------------------------------------------------------------------------------------------\n";
 }
 
 //employee has right to edit their info as well but not fully as manager
@@ -123,6 +124,7 @@ void displayOwnInfo(EList *l, string pass) {
             <<  setw(15) <<left<<  "Position"
             <<  setw(8) <<left<<  "Salary"
             <<  " |"<<endl;
+            cout<<"---------------------------------------------------------------------------------------------------------\n";
             cout << "| "<< setw(10) <<left<< d ->emp.id
             <<  setw(15) <<left<< d ->emp.firstName
             <<  setw(15)<<left<< d ->emp.lastName
@@ -139,6 +141,6 @@ void displayOwnInfo(EList *l, string pass) {
         d = d->next;
     }
     if(!found){
-        cout << "Incorrect ID/Password or not found." << endl;
+        cout << "Incorrect Password!" << endl;
     }
 }
