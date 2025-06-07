@@ -4,7 +4,18 @@
 
 //create a empty list
 EList *elist = createEmployeeList(); 
-
+//Add New Employee
+// View All Employees
+// Search Employee (by ID, name, department)
+// Update Employee Information
+// Delete Employee Record
+// View Employee by Department
+// Generate Employee Reports
+// Set Employee Salary/Position
+// View Attendance Records
+// Manage Employee Performance Reviews
+// Export Employee Data
+// Backup/Restore Database
 //manager interface
 void ManagerBoard() {
     int ch;
@@ -26,9 +37,15 @@ void ManagerBoard() {
                 removeEmp(elist); 
                 break;
             case 5: 
-                searchByID(elist); 
+                askSearch(elist);
                 break;
             case 6: 
+                viewEmpByDepar(elist);  
+                break;
+            case 7:
+                generateReportEmp(elist);
+                break;
+            case 8: 
                 return;
             default: 
                 cout << "Invalid." << endl;
@@ -60,6 +77,15 @@ void employeeBoard() {
                 displayOwnInfo(elist, currentLoginID);
                 break;
             case 5: 
+                viewSalary(elist);
+                break;
+            case 6:
+                requestLeave();
+                break;
+            case 7:
+                updateEmgInfo();
+                break;
+            case 8:
                 return;
             default: 
             cout << "Invalid." << endl;

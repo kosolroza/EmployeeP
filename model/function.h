@@ -8,6 +8,14 @@ struct EInfo {      //Employee information
     char gender;
     string id, firstName, lastName, phoneNumber, department, position, password;
     double salary, bonus;
+// Attendance
+    bool att[30];  // for 30days
+    int totalPresent;
+    int totalAbs;
+
+    string feedback;
+    string dateLeave, reason; 
+    string contactPhone, contanctName;
 };
 
 struct EData {     //Employee Data to store Employees Information

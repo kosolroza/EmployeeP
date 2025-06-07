@@ -74,6 +74,97 @@ void readEFromFile(EList *l) {
     f.close();
 }
 
+// =================================== Leave =========================================
+
+void writeReToFile(string id, string date, string reason) {
+    ofstream fout("records.txt", ios::app);
+    if (!fout) {
+        cout << "Error opening file to write leave.\n";
+        return;
+    }
+
+    fout << "===== LEAVE ====\n";
+    fout << id << "\t" << date << "\t" << reason << "\n";
+    fout.close();
+}
+
+void readReFromFile(string inputID) {
+    ifstream fin("records.txt");
+    if (!fin) {
+        cout << "Error opening file to read.\n";
+        return;
+    }
+
+    string line;
+    bool found = false;
+    while (getline(fin, line)) {
+        if (line == "LEAVE") {
+            string fileID, date, reason;
+            getline(fin, fileID);
+            getline(fin, date);
+            getline(fin, reason);
+
+            if (fileID == inputID) {
+                cout << "\nLeave Date: " << date << ", Reason: " << reason << endl;
+                found = true;
+            }
+        }
+    }
+
+    if (!found) {
+        cout << "No leave records found for ID: " << inputID << endl;
+    }
+
+    fin.close();
+}
+
+//  ======================= Emergency Contact =============================
+
+void writeEmgToFile(string id, string name, string phone) {
+    ofstream fout("records.txt", ios::app);
+    if (!fout) {
+        cout << "Error opening file to write emergency contact.\n";
+        return;
+    }
+
+    fout << "==== EMG ====\n";
+    fout << id << "\t" << name << "\t" << phone << "\n";
+    fout.close();
+}
+
+
+void readEmgFromFile(string inputID) {
+    ifstream fin("records.txt");
+    if (!fin) {
+        cout << "Error opening file to read emergency contacts.\n";
+        return;
+    }
+
+    string line;
+    bool found = false;
+    while (getline(fin, line)) {
+        if (line == "EMG") {
+            string fileID, name, phone;
+            getline(fin, fileID);
+            getline(fin, name);
+            getline(fin, phone);
+
+            if (fileID == inputID) {
+                cout << "\nEmergency Contact for ID " << inputID << ": " << endl;
+                cout << "Name: " << name << ", Phone: " << phone << endl;
+                found = true;
+            }
+        }
+    }
+
+    if (!found) {
+        cout << "No emergency contact records found for ID: " << inputID << endl;
+    }
+
+    fin.close();
+}
+
+
 //sort employee by name after before write it to file
 void sortEmpByName(EList *l) {
     if (l->head == nullptr || l->head->next == nullptr) {

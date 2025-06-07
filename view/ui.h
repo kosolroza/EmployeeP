@@ -45,7 +45,11 @@ void intoManager(){
         cout << "\t|                                                              |\n";
         cout << "\t|                 [5]  Find Employee                           |\n";
         cout << "\t|                                                              |\n";
-        cout << "\t|                 [6]  Exit                                    |\n";
+        cout << "\t|                 [6]  View Employee By department             |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|                 [7]  Generate Employee Report                |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|                 [8]  Exit                                    |\n";
         cout << "\t|                                                              |\n";
         cout << "\t --------------------------------------------------------------- \033[0m\n\n\n";
 
@@ -66,7 +70,13 @@ void intoEmployee(){
         cout << "\t|                                                              |\n";
         cout << "\t|          [4]  View My personal Information                   |\n";
         cout << "\t|                                                              |\n";
-        cout << "\t|          [5]  Exit                                           |\n";
+        cout << "\t|          [5]  View Salary                                    |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|          [6]  Request For Leave                              |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|          [7]  Update Emergency Contanct                      |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|          [8]  Exit                                           |\n";
         cout << "\t|                                                              |\n";
         cout << "\t --------------------------------------------------------------- \033[0m\n\n\n";
 

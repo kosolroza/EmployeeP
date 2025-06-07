@@ -144,3 +144,61 @@ void displayOwnInfo(EList *l, string pass) {
         cout << "Incorrect Password!" << endl;
     }
 }
+
+void viewSalary(EList *l){
+    if(!l->head){
+        cout<<"There are no employee found!"<<endl;
+        return;
+    }
+    string pass;
+    cout<<"Please confrim your password first! "<<endl;
+    cout<<"Enter your password: ";
+    cin>>pass;
+
+    EData *e = l->head;
+    while(e){
+        if(e->emp.password == pass){
+            cout<<"Your Salary: "<<e->emp.salary<<"$"<<endl;
+            return;
+        }
+        e = e->next;
+    }
+    cout<<"Incorrect Password! Please Try again!"<<endl;
+}
+
+void requestLeave() {
+    string id, reason, date;
+    cout << "If you want to request for leave, Please fill in this form: \n";
+    cout << "NOTED: You need to request 2 days before your leave.\n";
+    cout << "Enter your ID: ";
+    cin >> id;
+    cin.ignore();
+    cout << "Enter date for leave (YYYY-MM-DD): ";
+    getline(cin, date);
+    cout << "Enter reason for leave: ";
+    getline(cin, reason);
+
+    writeReToFile(id, date, reason);
+    cout << "Leave request has been submitted to management.\n";
+}
+
+void viewHisLeave(string id){
+    cout<<"Please Enter your ID to see Leave History: ";
+    cin>>id;
+    readReFromFile(id);
+}
+
+void updateEmgInfo() {
+    string id, contactName, contactPhone;
+    cout << "Enter your ID: ";
+    cin >> id;
+    cin.ignore();
+    cout << "Enter Emergency Contact Name: ";
+    getline(cin, contactName);
+    cout << "Enter Emergency Contact Phone: ";
+    getline(cin, contactPhone);
+
+    writeEmgToFile(id, contactName, contactPhone);
+    cout << "Emergency contact updated successfully.\n";
+}
+
