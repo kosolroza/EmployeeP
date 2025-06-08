@@ -172,32 +172,33 @@ void requestLeave(EList *l) {       // ask for requestLeave
     cout<<"Please confirm your password first"<<endl;
     cout<<"Enter your password: ";
     cin>>pass;
-    if(d->emp.password == pass){
-        cout << "\t[+] If you want to request for leave, Please fill in this form: \n";
-        cout << "\t[+] NOTED: You need to request 2 days before your leave.\n";
-        cout << "Enter your ID: ";
-        cin >> id;
-        cin.ignore();
-        cout << "Enter date for leave (YYYY-MM-DD): ";
-        getline(cin, date);
-        cout << "Enter reason for leave: ";
-        getline(cin, reason);
-    
-        writeReToFile(id, date, reason);
-        cout << "Leave request has been submitted to management.\n";
-        found =1;
+    while(d!=nullptr){
+        if(d->emp.password == pass){
+            cout << "\t[+] If you want to request for leave, Please fill in this form: \n";
+            cout << "\t[+] NOTED: You need to request 2 days before your leave.\n";
+            cout << "Enter your ID: ";
+            cin >> id;
+            cin.ignore();
+            cout << "Enter date for leave (YYYY-MM-DD): ";
+            getline(cin, date);
+            cout << "Enter reason for leave: ";
+            getline(cin, reason);
+        
+            writeReToFile(id, date, reason);
+            cout << "Leave request has been submitted to management.\n";
+            found =1 ;
+            break;
+        }
+        d = d->next;
     }
-    d = d->next;
     if(!found){
         cout<<"Incorrect Password! Please Try Again!"<<endl;
     }
 }
 
-void viewHisLeave(string id){  //For view their history
-    cout<<"Please Enter your ID to see Leave History: ";
-    cin>>id;
-    readReFromFile(id);
-}
+// void viewHisLeave(string id){  //For view their history;
+//     readReFromFile(id);
+// }
 
 void updateEmgInfo(EList *l) {              //employee can update their Emergency Contact suct ad Name, pNumber
     string id, contactName, contactPhone, pass;

@@ -83,8 +83,11 @@ void writeReToFile(string id, string date, string reason) {   //use for request 
         return;
     }
 
-    f1 << "=> Request For Leave\t";
-    f1 <<"ID: "<<id << "\tLeave Date: " << date << "\tReason: " << reason << "\n";
+    f1 << "Request For Leave:\n"; 
+    f1 << id << "\n"; 
+    f1 << date << "\n"; 
+    f1<< reason << "\n";
+    f1 <<"---\n";
     f1.close();
 }
 
@@ -98,9 +101,9 @@ void readReFromFile(string inputID) {
     string line;
     bool found = false;
     while (getline(f1, line)) {
-        if (line == "=> Request For Leave ") {
+        if (line == "Request For Leave:") {
             string fileID, date, reason;
-            getline(f1, fileID);
+            getline(f1, fileID); 
             getline(f1, date);
             getline(f1, reason);
 
@@ -127,8 +130,11 @@ void writeEmgToFile(string id, string name, string phone) {   //For write Emerge
         return;
     }
 
-    f2 << "=> Emergency Contact\t";
-    f2 <<"ID: "<<id << "\tContact Name: " << name << "\tContact Phone: " << phone << "\n";
+    f2 << "=> Emergency Contact:\n" ;
+    f2 << id << "\n";
+    f2 << name << "\n";
+    f2 << phone << "\n";
+    f2 << "---\n";
     f2.close();
 }
 
@@ -143,7 +149,7 @@ void readEmgFromFile(string inputID) {
     string line;
     bool found = false;
     while (getline(f2, line)) {
-        if (line == "Emergency Contact") {
+        if (line == "Emergency Contact:") {
             string fileID, name, phone;
             getline(f2, fileID);
             getline(f2, name);

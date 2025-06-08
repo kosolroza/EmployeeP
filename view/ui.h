@@ -49,7 +49,9 @@ void intoManager(){
         cout << "\t|                                                              |\n";
         cout << "\t|                 [7]  Generate Employee Report                |\n";
         cout << "\t|                                                              |\n";
-        cout << "\t|                 [8]  Exit                                    |\n";
+        cout << "\t|                 [8]  View Request Leave                      |\n";
+        cout << "\t|                                                              |\n";
+        cout << "\t|                 [9]  Exit                                    |\n";
         cout << "\t|                                                              |\n";
         cout << "\t --------------------------------------------------------------- \033[0m\n\n\n";
 

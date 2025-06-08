@@ -1,4 +1,5 @@
-=> Request For Leave	ID: E001	Leave Date: 2025-06-25	Reason: Family Trip
-=> Request For Leave	ID: E002	Leave Date: 2025-11-23	Reason: Birthday
-=> Emergency Contact	ID: E010	Contact Name: Cheata	Contact Phone: 012986331
-=> Emergency Contact	ID: E020	Contact Name: Nika	    Contact Phone: 012680824
+Request For Leave:
+E001
+2025-11-23
+Birthday Party
+---

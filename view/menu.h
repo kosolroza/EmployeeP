@@ -32,7 +32,14 @@ void ManagerBoard() {
             case 7:
                 generateReportEmp(elist);
                 break;
-            case 8: 
+            case 8: {
+                string id;
+                cout<<"Please Enter your ID: ";
+                cin>>id;
+                readReFromFile(id);
+                break;
+            }
+            case 9:
                 return;
             default: 
                 cout << "Invalid." << endl;
