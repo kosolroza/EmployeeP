@@ -4,19 +4,6 @@
 
 //create a empty list
 EList *elist = createEmployeeList(); 
-//Add New Employee
-// View All Employees
-// Search Employee (by ID, name, department)
-// Update Employee Information
-// Delete Employee Record
-// View Employee by Department
-// Generate Employee Reports
-// Set Employee Salary/Position
-// View Attendance Records
-// Manage Employee Performance Reviews
-// Export Employee Data
-// Backup/Restore Database
-//manager interface
 void ManagerBoard() {
     int ch;
     system("cls");

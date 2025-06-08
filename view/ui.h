@@ -109,4 +109,3 @@ string coverPass(){
     cout <<endl;
     return pass;
 }
-

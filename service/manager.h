@@ -16,6 +16,7 @@ void displayEmployees(EList *l);
 
 // Use add To End as addEmployee
 void addEmployee(EList *l) {      
+    displayEmployees(l);
     EInfo emp;   //call EInfo cause It store E'Info
     cout << "Enter ID: ";   // Check for duplicate ID so it can't be add to the list
     cin >> emp.id;
@@ -78,6 +79,7 @@ void updateEmp(EList *l) {
         cout << "No employees to update." << endl;
         return;
     }
+    displayEmployees(l);
     string id;
     cout << "Enter ID to update: "; 
     cin >> id;
@@ -85,7 +87,6 @@ void updateEmp(EList *l) {
     EData *e = l->head;   // also make sure that it start from head
     while (e) {
         if (e->emp.id == id) {
-            displayAllEmployees(l);
             int ch;
             cout << "Which one do you want to update? \n1-First Name \n2-Last Name \n3-Phone Number \n4-Department \n5-Position \n6-Salary \n7-Bonus\nEnter a choice: "; 
             cin >> ch;
@@ -207,7 +208,7 @@ void searchByID(EList *l) {
 }
 
 
-// 
+// This function is to search Employee By name
 void searchByname(EList *a){
     string name;
     cout << "Enter first name or last name to search: "; 
@@ -249,6 +250,7 @@ void searchByname(EList *a){
     }
 }
 
+//  This function is to search Employee by Department
 void searchByDepart(EList *l){
     string depart, pos;
     cout << "Enter department to search: "; 
@@ -471,7 +473,6 @@ void generateReportEmp(EList *s){
     cout<<"1. Employee Summary Report"<<endl;
     cout<<"2. Department-wise Report"<<endl;
     cout<<"3. Salary Report"<<endl;
-    cout<<"4. Export All Data to File"<<endl;
     cout<<"Please Enter your choice: ";
     cin>>choice;
 
@@ -486,10 +487,6 @@ void generateReportEmp(EList *s){
         }
         case 3:{
             salaryRep(s);
-            break;
-        }
-        case 4:{
-            writeEToFile(s);
             break;
         }
     }

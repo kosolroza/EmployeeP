@@ -1,2 +1,6 @@
 ===== LEAVE ====
 E001	2025-06-10	Klach Presentation
+===== LEAVE ====
+E005	2025-06-20	get-together
+==== EMG ====
+E005	Nita	01234567
