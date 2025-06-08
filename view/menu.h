@@ -67,10 +67,10 @@ void employeeBoard() {
                 viewSalary(elist);
                 break;
             case 6:
-                requestLeave();
+                requestLeave(elist);
                 break;
             case 7:
-                updateEmgInfo();
+                updateEmgInfo(elist);
                 break;
             case 8:
                 return;

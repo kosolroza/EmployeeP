@@ -15,7 +15,7 @@ void writeEToFile(EList *l) {
         return;
     }
 
-    f << "ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus,Password" << endl;
+    f << "ID,First Name,Last Name,Gender,Phone Number,Department,Position,Salary,Bonus,Password" << endl;  //before start write in to file 
     EData *e = l->head;
     while (e != nullptr) {
         f << e->emp.id << ","
@@ -42,7 +42,7 @@ void readEFromFile(EList *l) {
     }
 
     string line;
-    getline(f, line); // Skip header
+    getline(f, line); //  use for skip header
     while (getline(f, line)) {
         stringstream ss(line);
         string token;
@@ -51,11 +51,11 @@ void readEFromFile(EList *l) {
         getline(ss, emp.id, ',');
         getline(ss, emp.firstName, ',');
         getline(ss, emp.lastName, ',');
-        getline(ss, token, ','); emp.gender = token[0];
+        getline(ss, token, ','); emp.gender = token[0];   //since gender are ch, then it will store in [0] in array
         getline(ss, emp.phoneNumber, ',');
         getline(ss, emp.department, ',');
         getline(ss, emp.position, ',');
-        getline(ss, token, ','); emp.salary = stod(token);
+        getline(ss, token, ','); emp.salary = stod(token); //stod for string to double 
         getline(ss, token, ','); emp.bonus = stod(token);
         getline(ss, emp.password, ',');
 
@@ -76,33 +76,33 @@ void readEFromFile(EList *l) {
 
 // =================================== Leave =========================================
 
-void writeReToFile(string id, string date, string reason) {
-    ofstream fout("records.txt", ios::app);
-    if (!fout) {
+void writeReToFile(string id, string date, string reason) {   //use for request leave 
+    ofstream f1("records.txt", ios::app);
+    if (!f1) {
         cout << "Error opening file to write leave.\n";
         return;
     }
 
-    fout << "===== LEAVE ====\n";
-    fout << id << "\t" << date << "\t" << reason << "\n";
-    fout.close();
+    f1 << "=> Request For Leave\t";
+    f1 <<"ID: "<<id << "\tLeave Date: " << date << "\tReason: " << reason << "\n";
+    f1.close();
 }
 
 void readReFromFile(string inputID) {
-    ifstream fin("records.txt");
-    if (!fin) {
+    ifstream f1("records.txt");
+    if (!f1) {
         cout << "Error opening file to read.\n";
         return;
     }
 
     string line;
     bool found = false;
-    while (getline(fin, line)) {
-        if (line == "LEAVE") {
+    while (getline(f1, line)) {
+        if (line == "=> Request For Leave ") {
             string fileID, date, reason;
-            getline(fin, fileID);
-            getline(fin, date);
-            getline(fin, reason);
+            getline(f1, fileID);
+            getline(f1, date);
+            getline(f1, reason);
 
             if (fileID == inputID) {
                 cout << "\nLeave Date: " << date << ", Reason: " << reason << endl;
@@ -115,39 +115,39 @@ void readReFromFile(string inputID) {
         cout << "No leave records found for ID: " << inputID << endl;
     }
 
-    fin.close();
+    f1.close();
 }
 
 //  ======================= Emergency Contact =============================
 
-void writeEmgToFile(string id, string name, string phone) {
-    ofstream fout("records.txt", ios::app);
-    if (!fout) {
+void writeEmgToFile(string id, string name, string phone) {   //For write Emergency Contact
+    ofstream f2("records.txt", ios::app);
+    if (!f2) {
         cout << "Error opening file to write emergency contact.\n";
         return;
     }
 
-    fout << "==== EMG ====\n";
-    fout << id << "\t" << name << "\t" << phone << "\n";
-    fout.close();
+    f2 << "=> Emergency Contact\t";
+    f2 <<"ID: "<<id << "\tContact Name: " << name << "\tContact Phone: " << phone << "\n";
+    f2.close();
 }
 
 
 void readEmgFromFile(string inputID) {
-    ifstream fin("records.txt");
-    if (!fin) {
+    ifstream f2("records.txt");
+    if (!f2) {
         cout << "Error opening file to read emergency contacts.\n";
         return;
     }
 
     string line;
     bool found = false;
-    while (getline(fin, line)) {
-        if (line == "EMG") {
+    while (getline(f2, line)) {
+        if (line == "Emergency Contact") {
             string fileID, name, phone;
-            getline(fin, fileID);
-            getline(fin, name);
-            getline(fin, phone);
+            getline(f2, fileID);
+            getline(f2, name);
+            getline(f2, phone);
 
             if (fileID == inputID) {
                 cout << "\nEmergency Contact for ID " << inputID << ": " << endl;
@@ -161,7 +161,7 @@ void readEmgFromFile(string inputID) {
         cout << "No emergency contact records found for ID: " << inputID << endl;
     }
 
-    fin.close();
+    f2.close();
 }
 
 

@@ -50,11 +50,6 @@ void addEmployee(EList *l) {
     cin >> emp.password;
 
     EData *e = new EData;  //Let all emp info = null all
-    
-    for(int i=0; i<30; i++){
-        e->emp.att[i] = false;
-    }
-
     e->emp = emp;
     e->next = nullptr;
     e->pre = nullptr;
@@ -402,7 +397,7 @@ void viewEmpByDepar(EList *l){
         cout<<"The Company has no department"<<dep<<"!";
     }
 }
-
+ //Summary Report for employee
 void summaryRep(EList *a){
     cout<<"\t\t ============= Employee summary report ==========="<<endl;
     cout<<" ==> Total Employee: "<<a->n<<endl;
