@@ -196,9 +196,6 @@ void requestLeave(EList *l) {       // ask for requestLeave
     }
 }
 
-// void viewHisLeave(string id){  //For view their history;
-//     readReFromFile(id);
-// }
 
 void updateEmgInfo(EList *l) {              //employee can update their Emergency Contact suct ad Name, pNumber
     string id, contactName, contactPhone, pass;
@@ -207,20 +204,23 @@ void updateEmgInfo(EList *l) {              //employee can update their Emergenc
     cout<<"Please confirm your password first"<<endl;
     cout<<"Enter your password: ";
     cin>>pass;
-    if(d->emp.password == pass){
-        cout << "Enter your ID: ";
-        cin >> id;
-        cin.ignore();
-        cout << "Enter Emergency Contact Name: ";
-        getline(cin, contactName);
-        cout << "Enter Emergency Contact Phone: ";
-        getline(cin, contactPhone);
-    
-        writeEmgToFile(id, contactName, contactPhone);
-        cout << "Emergency contact updated successfully.\n";
-        found = 1;
+    while(d!=nullptr){
+        if(d->emp.password == pass){
+            cout << "Enter your ID: ";
+            cin >> id;
+            cin.ignore();
+            cout << "Enter Emergency Contact Name: ";
+            getline(cin, contactName);
+            cout << "Enter Emergency Contact Phone: ";
+            getline(cin, contactPhone);
+        
+            writeEmgToFile(id, contactName, contactPhone);
+            cout << "Emergency contact updated successfully.\n";
+            found = 1;
+            break;
+        }
+        d = d->next;
     }
-    d = d->next;
     if(!found){
         cout<<"Incorrect Password! Please Try again!"<<endl;
     }
